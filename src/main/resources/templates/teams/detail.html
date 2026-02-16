@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>球団詳細</title>
+  <style>
+    /* historyの改行をそのまま表示するためのCSS（超重要） */
+    .history {
+      white-space: pre-wrap; /* 改行・スペースを保持して折り返す */
+    }
+  </style>
+</head>
+<body>
+
+  <h1>球団詳細</h1>
+
+  <p><strong>球団名</strong><br>
+    <span th:text="${team.teamName}">読売ジャイアンツ</span>
+  </p>
+
+  <p><strong>本拠地</strong><br>
+    <span th:text="${team.headquarters}">東京ドーム</span>
+  </p>
+
+  <p><strong>発足</strong><br>
+    <span th:text="${team.inauguration}">1934年12月26日</span>
+  </p>
+
+  <p><strong>歴史</strong><br>
+    <span class="history" th:text="${team.history}">歴史が表示されます</span>
+  </p>
+
+  <p>
+   
+    <a th:href="@{/teams}">戻る</a>
+  </p>
+
+</body>
+</html>

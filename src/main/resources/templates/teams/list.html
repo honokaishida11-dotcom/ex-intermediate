@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>野球チーム一覧</title>
+</head>
+<body>
+  <h1>野球チーム一覧（発足日が古い順）</h1>
+
+  <ul>
+    <li th:each="team : ${teams}">
+      
+      <a th:href="@{/teams/{id}(id=${team.id})}"
+         th:text="${team.teamName}">チーム名</a>
+      <span th:text="'（発足：' + ${team.inauguration} + '）'">（発足日）</span>
+    </li>
+  </ul>
+</body>
+</html>
