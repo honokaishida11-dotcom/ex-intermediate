@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>ホテル検索結果</title>
+  <style>
+    /* スクショっぽい水色縦表 */
+    .hotel-card {
+      border-collapse: collapse;
+      min-width: 360px;
+      margin: 12px 0;
+    }
+    .hotel-card th, .hotel-card td {
+      border: 2px solid #6b8fbf;
+      padding: 6px 12px;
+    }
+    .hotel-card th {
+      width: 90px;
+      background: #d9e6f7;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .hotel-card td {
+      background: #eef4ff;
+    }
+  </style>
+</head>
+<body>
+  <h1>ホテル検索結果</h1>
+
+  <p th:if="${price == null}">条件：全件</p>
+  <p th:if="${price != null}" th:text="'条件：' + ${price} + '円以下'">条件：10000円以下</p>
+
+  <div th:if="${hotels == null || hotels.isEmpty()}">
+    <p>検索結果がありません。</p>
+  </div>
+
+  <div th:if="${hotels != null && !hotels.isEmpty()}">
+    <div th:each="hotel : ${hotels}">
+      <table class="hotel-card">
+        <tr>
+          <th>ホテル名</th>
+          <td th:text="${hotel.hotelName}">ホテル名</td>
+        </tr>
+        <tr>
+          <th>最寄駅</th>
+          <td th:text="${hotel.nearestStation}">最寄駅</td>
+        </tr>
+        <tr>
+          <th>価格</th>
+          <td th:text="${#numbers.formatInteger(hotel.price, 0, 'COMMA')}">10,000</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <p style="margin-top:16px;">
+    <a th:href="@{/hotels}">検索画面に戻る</a>
+  </p>
+</body>
+</html>
